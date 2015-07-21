@@ -38,6 +38,9 @@ class ImagerProfile(models.Model):
     objects = models.Manager()
     active = ActiveProfileManager()
 
+    def __str__(self):
+        return self.user.get_user_name() or self.user.username
+
     def is_active(self):
         return self.user.is_active
 
