@@ -22,7 +22,11 @@ class ActiveProfileManager(models.Manager):
 
 @python_2_unicode_compatible
 class ImagerProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(
+        User,
+        related_name="profile",
+        null=False
+    )
     camera = models.CharField(
         max_length=128,
         help_text="What is the make and model of your camera?"
@@ -39,7 +43,7 @@ class ImagerProfile(models.Model):
     active = ActiveProfileManager()
 
     def __str__(self):
-        return self.user.get_user_name() or self.user.username
+        return self.user.get_full_name() or self.user.username
 
     def is_active(self):
         return self.user.is_active
