@@ -25,7 +25,7 @@ SECRET_KEY = 'u7a=fj5d4u+o!x!mvb#16o)nc%md4t@d^t5!40g#r@7y=m%0er'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imager_profile',
+    'imager_images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,3 +102,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Media file handling
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
