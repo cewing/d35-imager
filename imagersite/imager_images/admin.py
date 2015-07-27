@@ -38,6 +38,7 @@ class AlbumAdmin(admin.ModelAdmin):
         return obj.photos.count()
     count.short_description = '# of Photos'
 
+
 class PhotoAdmin(admin.ModelAdmin):
     inlines = (PhotoInAlbumForPhotosInline, )
     list_display = [
