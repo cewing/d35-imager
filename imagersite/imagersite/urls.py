@@ -17,10 +17,15 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from imagersite import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-
+    url(r'^$', 'imagersite.views.home_view', name='homepage'),
+    url(r'^(?P<num>\d+)/(?P<name>\w+)/$', TemplateView.as_view(
+        template_name='home.html',
+    ), name='testme'),
 ]
 
 if settings.DEBUG:
