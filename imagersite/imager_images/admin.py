@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib.gis import admin
 from django.core.urlresolvers import reverse
 
 from .models import Photo, Album
@@ -39,7 +39,7 @@ class AlbumAdmin(admin.ModelAdmin):
     count.short_description = '# of Photos'
 
 
-class PhotoAdmin(admin.ModelAdmin):
+class PhotoAdmin(admin.GeoModelAdmin):
     inlines = (PhotoInAlbumForPhotosInline, )
     list_display = [
         'owner', '__str__', 'date_uploaded', 'date_modified','published'

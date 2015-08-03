@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.gis.db import models as geo_models
 from django.utils.encoding import python_2_unicode_compatible
 
 
@@ -28,6 +29,11 @@ class Photo(models.Model):
         choices=STATE_CHOICES,
         default='private'
     )
+    location = geo_models.PointField("location", null=True, blank=True)
+
+
+    objects = geo_models.Manager()
+
 
     def __str__(self):
         return self.title
@@ -43,6 +49,7 @@ class Album(models.Model):
         Photo,
         related_name='albums',
         through='PhotoInAlbum',
+        blank=True
     )
     title = models.CharField(max_length=256)
     description = models.TextField()
@@ -68,8 +75,8 @@ class Album(models.Model):
 
 @python_2_unicode_compatible
 class PhotoInAlbum(models.Model):
-    photo = models.ForeignKey(Photo)
-    album = models.ForeignKey(Album)
+    photo = models.ForeignKey(Photo, null=True, blank=True)
+    album = models.ForeignKey(Album, null=True, blank=True)
     is_cover = models.BooleanField(default=False)
 
     def __str__(self):
